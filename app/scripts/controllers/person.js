@@ -8,10 +8,9 @@
  * Controller of the angularApp
  */
 angular.module('angularApp')
-  .controller('PersonCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('PersonController', function ($scope, People, RestPeople, $routeParams) {
+     //$scope.person = People.get($routeParams.id);
+     RestPeople.get($routeParams.id).success(function(data){
+         $scope.person = data;
+     })
   });
