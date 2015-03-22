@@ -1,3 +1,4 @@
+<input type="text" class="form-control" ng-model="search.$" />
 <form name="editPersonForm" novalidate>
 <table class="table">
     <thead>
@@ -10,7 +11,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="person in people">
+    <tr ng-repeat="person in people | filter: search">
         <td>{{person.id | limitString:5}}</td>
         <td ng-click="view(person.id)">{{person.name}}</td>
         <td>{{person.surname}}</td>
