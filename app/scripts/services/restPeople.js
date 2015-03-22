@@ -8,17 +8,18 @@
  * Service in the angularApp.
  */
 angular.module('angularApp')
-    .factory('RestPeople', function ($http) {
+    .provider('RestPeople', function RestPeopleProvider() {
 
-          var url = 'http://localhost:3000/people',
-              _add = function (person) {
-                  return $http.post(url, person);
-              },
+        var url,
+            myHttp,
+            _add = function (person) {
+                return $http.post(url, person);
+            },
             _get = function (id){
                 return $http.get(url + "/" + id);
             },
             _list = function() {
-                return $http.get(url);
+                return myHttp.get(url);
             },
 
             _delete = function (id) {
@@ -26,10 +27,21 @@ angular.module('angularApp')
             };
 
         return {
-            get: _get,
-            list: _list,
-            delete: _delete,
-            add: _add
+
+            setUrl: function(u) {
+                url = u;
+            },
+
+            $get: function($http) {
+
+                myHttp = $http;
+                return {
+                    get: _get,
+                    list: _list,
+                    delete: _delete,
+                    add: _add
+                }
+            }
         }
 
     // AngularJS will instantiate a singleton by calling "new" on this function

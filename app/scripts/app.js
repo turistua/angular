@@ -22,4 +22,7 @@ angular
             controller: 'PeopleController'
         })
     }])
+    .config(['RestPeopleProvider', function(RestPeopleProvider) {
+        RestPeopleProvider.setUrl('http://localhost:3000/people');
+    }]);
   ;
