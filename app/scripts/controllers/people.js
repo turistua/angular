@@ -28,16 +28,13 @@ angular.module('angularApp')
         };
 
         $scope.savePerson = function(){
-            RestPeople.add($scope.editPerson)
+            RestPeople.save($scope.editPerson)
                 .success(function(data){
                     $scope.people = $scope.people.filter(function(person){
                         return person.id != data.id;
                     });
-                    //console.log(data);
                     $scope.people.push(data);
                 });
-            //People.add($scope.editPerson);
-            //console.log(People.list());
             $scope.resetPerson();
         };
 

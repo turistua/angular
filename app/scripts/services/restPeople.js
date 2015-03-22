@@ -12,18 +12,18 @@ angular.module('angularApp')
 
         var url,
             myHttp,
-            _add = function (person) {
-                return $http.post(url, person);
+            _save = function (person) {
+                return (person.id) ? myHttp.put(url + '/' + person.id, person) : myHttp.post(url, person);
             },
             _get = function (id){
-                return $http.get(url + "/" + id);
+                return myHttp.get(url + "/" + id);
             },
             _list = function() {
                 return myHttp.get(url);
             },
 
             _delete = function (id) {
-                return $http.delete(url+ "/" + id);
+                return myHttp.delete(url+ "/" + id);
             };
 
         return {
@@ -39,7 +39,7 @@ angular.module('angularApp')
                     get: _get,
                     list: _list,
                     delete: _delete,
-                    add: _add
+                    save: _save
                 }
             }
         }
